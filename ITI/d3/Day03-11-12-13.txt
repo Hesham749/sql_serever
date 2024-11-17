@@ -1,0 +1,12 @@
+--1
+insert into   Employee (Fname,Lname,SSN,Superssn,Salary,Dno)
+values ('Muhammad','fathi',102672,112233,3000,30)
+--------------------
+--2
+insert into   Employee (Fname,Lname,SSN,Dno)
+values ('maged','hossam',102660,30)
+---------------------------
+--3
+update Employee
+set Salary= Salary*1.2
+where SSN = 102672

@@ -1,0 +1,1 @@
+SELECT Fname as [first name] , Lname as [last name] , Salary , Dno as [department number] FROM Employee

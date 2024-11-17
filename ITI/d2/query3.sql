@@ -1,0 +1,1 @@
+SELECT Pname as [Projects names] , Plocation as [loctaions] , Project.Dnum as [department] FROM Project
