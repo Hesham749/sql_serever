@@ -48,3 +48,21 @@ VALUES
     (10102 , 'Ann' , 'Jones' , 'd3'	 , 3000)
 
 
+CREATE SCHEMA Company ;
+CREATE SCHEMA Human ;
+
+ALTER SCHEMA Company transfer dbo.Department;
+ALTER SCHEMA [Human Resource] transfer dbo.Employee ;
+
+ALTER SCHEMA [Human Resource] transfer Human.Employee
+
+CREATE synonym Emp FOR [Human Resource].Employee
+
+
+
+Select * from Employee
+Select * from [Human Resource].Employee
+Select * from Emp
+Select * from [Human Resource].Emp
+
+
