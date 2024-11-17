@@ -60,9 +60,14 @@ CREATE synonym Emp FOR [Human Resource].Employee
 
 
 
+--3
+SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+WHERE TABLE_NAME='Employee';
+
+
+--4
 Select * from Employee
 Select * from [Human Resource].Employee
 Select * from Emp
 Select * from [Human Resource].Emp
-
-
