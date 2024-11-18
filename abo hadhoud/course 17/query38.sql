@@ -1,8 +1,6 @@
 USE VehicleMakesDB
 
 
-SELECT COUNT(*)
+SELECT DISTINCT Engine_CC
 FROM VehicleDetails
-WHERE Engine_CC > (
-SELECT AVG(Engine_CC) AS x
-FROM VehicleDetails )
+ORDER BY Engine_CC DESC
