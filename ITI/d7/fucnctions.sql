@@ -48,7 +48,7 @@ SELECT TOP(1)
 FROM Instructor AS i
 ORDER BY LEN( i.Ins_Name) DESC
 
-
+--! functions
 
 -- scalar function
 CREATE FUNCTION getIName(@id INT)
@@ -97,3 +97,18 @@ END
 
 SELECT *
 FROM getStd('last')
+
+--! windowing functions
+
+-- LAG()   ==> get the previous record based on the order by
+--* it takes mandatory parameter is what column will show and optional column that how many prev will be
+
+SELECT * , LAG(Ins_Name)OVER(ORDER BY salary) AS prev
+FROM Instructor AS i
+
+
+-- LEAD()   ==> get the next record based on the order by
+--* it takes mandatory parameter is what column will show and optional column that how many next will be
+
+SELECT * , LEAD(Salary,2)OVER(ORDER BY salary) AS NEXT
+FROM Instructor AS i
