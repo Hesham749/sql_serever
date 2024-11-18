@@ -112,3 +112,15 @@ FROM Instructor AS i
 
 SELECT * , LEAD(Salary,2)OVER(ORDER BY salary) AS NEXT
 FROM Instructor AS i
+
+
+-- FIRST_VALUE()
+
+SELECT * , FIRST_VALUE(Salary)OVER(ORDER BY salary) AS FIRST
+FROM Instructor AS i
+
+-- LAST_VALUE()
+--* to get the right value of the last_value you must add the ***(range between current row and unbounded following)***
+SELECT * , LAST_VALUE(Salary)
+OVER(  ORDER BY salary RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING) AS LAST
+FROM Instructor AS i
