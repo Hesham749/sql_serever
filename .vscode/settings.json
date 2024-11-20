@@ -1,0 +1,6 @@
+{
+    "dataworkspace.excludedProjects": [
+        "ITI/d10/SQLCLR/Database1/Database1.sqlproj",
+        "ITI/d10/Day5/ITIDB2012/ITIDB/ITIDB.sqlproj"
+    ]
+}
