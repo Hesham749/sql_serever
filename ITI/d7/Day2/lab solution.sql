@@ -100,3 +100,12 @@ END
 SELECT St_Id , SUBSTRING(St_Fname,1,(LEN(St_Fname)-1)) AS fname
 FROM Student
 
+
+--8
+
+DELETE sc
+FROM Stud_Course sc JOIN Student AS s
+    ON sc.St_Id = s.St_Id
+    JOIN Department AS d
+    ON s.Dept_Id = d.Dept_Id
+WHERE d.Dept_Name = 'SD'
