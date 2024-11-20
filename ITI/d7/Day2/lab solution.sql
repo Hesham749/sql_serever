@@ -95,3 +95,8 @@ BEGIN
     RETURN
 END
 
+--7
+
+SELECT St_Id , SUBSTRING(St_Fname,1,(LEN(St_Fname)-1)) AS fname
+FROM Student
+
