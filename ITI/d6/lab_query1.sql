@@ -1,7 +1,7 @@
 USE SD
 
 
-CREATE RULE r1 AS @x in('NY','DS','KW')
+CREATE RULE r1 AS @x IN('NY','DS','KW')
 
 CREATE DEFAULT d1 AS  'NY'
 
@@ -15,7 +15,7 @@ CREATE TABLE Department
 (
     DeptNo NVARCHAR(10) PRIMARY KEY ,
     DeptName NVARCHAR(50),
-    Location loc
+    Location LOC
 )
 
 
@@ -48,15 +48,17 @@ VALUES
     (10102 , 'Ann' , 'Jones' , 'd3'	 , 3000)
 
 
-CREATE SCHEMA Company ;
-CREATE SCHEMA Human ;
+CREATE SCHEMA Company
+;
+CREATE SCHEMA Human
+;
 
 ALTER SCHEMA Company transfer dbo.Department;
 ALTER SCHEMA [Human Resource] transfer dbo.Employee ;
 
 ALTER SCHEMA [Human Resource] transfer Human.Employee
 
-CREATE synonym Emp FOR [Human Resource].Employee
+CREATE SYNONYM Emp FOR [Human Resource].Employee
 
 
 
@@ -67,7 +69,55 @@ WHERE TABLE_NAME='Employee';
 
 
 --4
-Select * from Employee
-Select * from [Human Resource].Employee
-Select * from Emp
-Select * from [Human Resource].Emp
+SELECT *
+FROM Employee
+SELECT *
+FROM [Human Resource].Employee
+SELECT *
+FROM Emp
+SELECT *
+FROM [Human Resource].Emp
+
+
+--5
+
+UPDATE p
+SET  p.Budget *=1.10
+    FROM Works_on AS w JOIN sd.Company.Project AS p
+    ON w.ProjectNo = p.ProjectNo
+    WHERE w.EmpNo = 10102 AND Job = 'Manager'
+
+SELECT *
+FROM Company.Project
+
+
+--6
+
+UPDATE d
+SET d.DeptName = 'Sales'
+FROM [Human Resource].Employee AS e JOIN Company.Department AS d
+    ON e.DeptNo = d.DeptNo
+WHERE e.EmpFname = 'james'
+
+--7
+
+UPDATE w
+SET w.Enter_Date = '2007.12.12'
+FROM [Human Resource].Employee AS e JOIN Works_on AS w
+    ON w.EmpNo = e.EmpNo
+    JOIN Company.Department AS d
+    ON e.DeptNo = d.DeptNo
+WHERE d.DeptName = 'Sales' AND w.ProjectNo = 'p1'
+
+
+-- 8
+
+DELETE w
+FROM Works_on
+AS w JOIN [Human Resource].Employee AS e
+    ON w.EmpNo = e.EmpNo
+    JOIN Company.Department AS d
+    ON e.DeptNo = d.DeptNo
+WHERE d.[Location] = 'KW'
+
+
