@@ -24,6 +24,6 @@ END
 
 
 UPDATE Instructor
-set Ins_Name = 'Reham'
-OUTPUT GETDATE(), deleted.Ins_Name as old , inserted.Ins_Name as new
+SET Ins_Name = 'Reham'
+OUTPUT GETDATE(), deleted.Ins_Name AS old , inserted.Ins_Name AS new
 WHERE Ins_Id =3
