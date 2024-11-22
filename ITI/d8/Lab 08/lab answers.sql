@@ -83,10 +83,9 @@ USE ITI
 
 CREATE NONCLUSTERED INDEX s2 ON student(St_Age)
 
-CREATE  UNIQUE INDEX  s3 on student(St_Age)
+CREATE  UNIQUE INDEX  s3 ON student(St_Age)
 
 SELECT s.
 FROM Student AS s
 
 
--- 8
