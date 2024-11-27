@@ -108,7 +108,32 @@ CLOSE c1
 DEALLOCATE c1
 
 
+-- other method
+
+DECLARE c1 CURSOR
+FOR
 SELECT
-    *
+    Ins_Name
 FROM
     Instructor
+FOR
+READ
+ONLY
+DECLARE @name NVARCHAR(50) , @counter INT =0 , @flag INT = 0
+OPEN c1
+FETCH c1 INTO @name
+WHILE @@FETCH_STATUS =0
+BEGIN
+    IF @name = 'Ahmed'
+            SET @flag = 1
+    ELSE IF @name = 'Amr' AND @flag =1
+        SET @counter +=1
+    ELSE
+        SET @flag = 0
+    FETCH c1 INTO @name
+END
+SELECT
+    @counter
+CLOSE c1
+DEALLOCATE c1
+
