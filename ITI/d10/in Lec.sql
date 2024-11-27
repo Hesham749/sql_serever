@@ -90,7 +90,8 @@ SELECT
 FROM
     Instructor
 FOR
-UPDATE
+READ
+ONLY
 DECLARE @name NVARCHAR(50) , @counter INT =0 , @prevName NVARCHAR (50) =''
 OPEN c1
 FETCH c1 INTO @name
