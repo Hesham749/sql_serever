@@ -81,5 +81,33 @@ CLOSE c1
 DEALLOCATE c1
 
 
-SELECT salary from Instructor
+--4
 
+DECLARE c1 CURSOR
+FOR
+SELECT
+    Ins_Name
+FROM
+    Instructor
+FOR
+UPDATE
+DECLARE @name NVARCHAR(50) , @counter INT =0 , @prevName NVARCHAR (50) =''
+OPEN c1
+FETCH c1 INTO @name
+WHILE @@FETCH_STATUS =0
+BEGIN
+    IF @name = 'Amr' AND @prevName ='Ahmed'
+    SET @counter +=1
+    SET @prevName = @name
+    FETCH c1 INTO @name
+END
+SELECT
+    @counter
+CLOSE c1
+DEALLOCATE c1
+
+
+SELECT
+    *
+FROM
+    Instructor
