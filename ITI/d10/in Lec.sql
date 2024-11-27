@@ -1,6 +1,10 @@
 USE ITI
 
 
+
+--!         Cursor
+
+--1
 DECLARE c1 CURSOR
 FOR SELECT
     St_Id ,
@@ -28,7 +32,7 @@ DEALLOCATE c1
 
 
 
--- second ex
+-- 2
 
 DECLARE c1 CURSOR
  FOR
@@ -136,4 +140,7 @@ SELECT
     @counter
 CLOSE c1
 DEALLOCATE c1
+
+
+-------------------------------------------------------------------------------------------------
 
