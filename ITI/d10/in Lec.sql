@@ -26,8 +26,9 @@ CLOSE c1
 DEALLOCATE c1
 
 
--- second ex
 
+
+-- second ex
 
 DECLARE c1 CURSOR
  FOR
