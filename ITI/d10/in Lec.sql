@@ -52,3 +52,34 @@ SELECT
     @allNames
 CLOSE c1
 DEALLOCATE c1
+
+
+--3
+
+DECLARE c1 CURSOR
+FOR
+SELECT
+    Salary
+FROM
+    Instructor
+FOR
+UPDATE
+DECLARE @sal INT
+OPEN c1
+FETCH c1 INTO @sal
+WHILE @@FETCH_STATUS =0
+BEGIN
+    IF
+  @sal >= 3000
+        UPDATE Instructor
+  SET Salary = @sal * 1.20
+  WHERE CURRENT OF c1
+
+    FETCH c1 INTO @sal
+END
+CLOSE c1
+DEALLOCATE c1
+
+
+SELECT salary from Instructor
+
