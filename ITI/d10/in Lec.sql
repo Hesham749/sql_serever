@@ -35,8 +35,7 @@ DECLARE c1 CURSOR
     St_Fname
 FROM
     Student
-WHERE St_Fname IS
-NOT NULL
+WHERE St_Fname IS NOT NULL
 FOR
 READ
 only
