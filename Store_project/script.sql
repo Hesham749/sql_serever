@@ -92,3 +92,13 @@ VALUES
 
 -- DML
 
+--3
+select * FROM Customers
+
+--4
+select * FROM Products
+WHERE Price > 500
+
+--5
+
+
