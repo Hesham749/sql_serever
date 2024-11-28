@@ -146,3 +146,8 @@ AS
 
 
 SELECT * FROM vProductCat
+
+
+-- 9
+
+CREATE NONCLUSTERED INDEX x1 ON Orders(OrderDate)
