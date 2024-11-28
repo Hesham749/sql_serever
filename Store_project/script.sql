@@ -213,3 +213,22 @@ CLOSE c1
 DEALLOCATE c1
 
 
+--13
+
+CREATE TRIGGER t1 ON OrderDetails after INSERT
+AS
+DECLARE @Quantity INT = SELECT
+    sum(Quantity)
+FROM
+    inserted
+GROUP BY ProductId
+HAVING ProductId = 1
+
+IF @Quantity > 0
+BEGIN
+    UPDATE p
+    SET p.Stock -= @Quantity
+    FROM
+        Products AS p
+    WHERE ProductId =1
+END
