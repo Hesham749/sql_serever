@@ -164,9 +164,27 @@ SELECT
     *
 FROM
     Orders AS o
-    WHERE o.OrderId = @id
+WHERE o.OrderId = @id
 
 sp_getOrder 1
 
 
 --11
+
+CREATE FUNCTION CalcTotal(@order INT)
+RETURNS DEC(8,2)
+AS
+BEGIN
+    RETURN
+(SELECT
+        SUM(TotalAmount)
+    FROM
+        Orders
+    GROUP BY OrderId
+    HAVING OrderId =@order
+    )
+END
+
+
+SELECT
+    dbo.CalcTotal(2) AS total
