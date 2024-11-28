@@ -145,9 +145,28 @@ AS
         ON p.CategoryId = c.CategoryId
 
 
-SELECT * FROM vProductCat
+SELECT
+    *
+FROM
+    vProductCat
 
 
 -- 9
 
 CREATE NONCLUSTERED INDEX x1 ON Orders(OrderDate)
+
+--10
+
+CREATE PROC sp_getOrder
+    @id INT
+AS
+SELECT
+    *
+FROM
+    Orders AS o
+    WHERE o.OrderId = @id
+
+sp_getOrder 1
+
+
+--11
