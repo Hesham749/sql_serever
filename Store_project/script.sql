@@ -127,7 +127,22 @@ FROM
 
 SELECT
     OrderId ,
-    SUM(TotalAmount) as totalSales
+    SUM(TotalAmount) AS totalSales
 FROM
     Orders
 GROUP BY OrderId
+
+
+--8
+
+CREATE VIEW vProductCat
+AS
+    SELECT
+        p.* ,
+        c.CategoryName
+    FROM
+        Products AS p JOIN Categories AS c
+        ON p.CategoryId = c.CategoryId
+
+
+SELECT * FROM vProductCat
