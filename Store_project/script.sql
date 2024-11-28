@@ -188,3 +188,28 @@ END
 
 SELECT
     dbo.CalcTotal(2) AS total
+
+--12
+
+DECLARE c1 CURSOR
+FOR
+SELECT
+    Email
+FROM
+    Customers
+FOR
+READ
+ONLY
+DECLARE @mail NVARCHAR(50)
+OPEN c1
+FETCH c1 INTO @mail
+WHILE @@FETCH_STATUS =0
+BEGIN
+    SELECT
+        @mail
+    FETCH c1 INTO @mail
+END
+CLOSE c1
+DEALLOCATE c1
+
+
