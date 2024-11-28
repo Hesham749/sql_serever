@@ -46,10 +46,6 @@ CREATE TABLE OrderDetails
 
 
 
-
-
-DROP TABLE OrderDetails
-
 --DML
 
 INSERT INTO Categories (CategoryId, CategoryName)
@@ -101,4 +97,10 @@ WHERE Price > 500
 
 --5
 
+select od.* FROM OrderDetails as od JOIN Orders as o
+on o.OrderId = od.OrderId
+WHERE CustomerId = 3
+
+
+--6
 
