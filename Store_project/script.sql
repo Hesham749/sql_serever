@@ -126,6 +126,8 @@ FROM
 --7
 
 SELECT
-    *
+    OrderId ,
+    SUM(TotalAmount) as totalSales
 FROM
     Orders
+GROUP BY OrderId
