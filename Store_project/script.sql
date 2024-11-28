@@ -217,14 +217,15 @@ DEALLOCATE c1
 
 CREATE TRIGGER t1 ON OrderDetails after INSERT
 AS
-DECLARE @Quantity INT = SELECT
+
+    DECLARE @Quantity INT = (SELECT
     sum(Quantity)
 FROM
     inserted
 GROUP BY ProductId
-HAVING ProductId = 1
+HAVING ProductId = 1)
 
-IF @Quantity > 0
+    IF @Quantity > 0
 BEGIN
     UPDATE p
     SET p.Stock -= @Quantity
@@ -232,3 +233,16 @@ BEGIN
         Products AS p
     WHERE ProductId =1
 END
+
+
+
+
+INSERT INTO OrderDetails
+    (OrderId, ProductId, Quantity, UnitPrice)
+VALUES
+    (3, 1, 3, 1500.00),
+    (2, 3, 3, 1500.00)
+
+
+--14
+
