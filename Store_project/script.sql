@@ -60,17 +60,37 @@ BEGIN
         Products AS p JOIN inserted AS i ON p.ProductId = i.ProductId
 
 
+    --* faster way than next one
+
     UPDATE o
     SET o.TotalAmount = r1.total
     FROM
-        Orders AS o JOIN
-        (SELECT
-            o.OrderId ,
-            SUM(od.Quantity * od.UnitPrice) AS total
+        Orders AS o JOIN (SELECT
+            od.OrderId ,
+            SUM(od.Quantity * od.UnitPrice)  AS total
         FROM
-            OrderDetails AS od JOIN Orders AS o ON od.OrderId = o.OrderId
-        GROUP BY o.OrderId) AS r1
+            OrderDetails od
+        GROUP BY od.OrderId
+        HAVING od.OrderId IN (SELECT
+            OrderId
+        FROM
+            inserted)) AS r1
         ON o.OrderId = r1.OrderId
+
+--* slower one
+
+
+-- UPDATE o
+-- SET o.TotalAmount = r1.total
+-- FROM
+--     Orders AS o JOIN
+--     (SELECT
+--         o.OrderId ,
+--         SUM(od.Quantity * od.UnitPrice) AS total
+--     FROM
+--         OrderDetails AS od JOIN Orders AS o ON od.OrderId = o.OrderId
+--     GROUP BY o.OrderId) AS r1
+--     ON o.OrderId = r1.OrderId
 
 END
 
