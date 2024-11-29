@@ -72,6 +72,7 @@ BEGIN
             OrderDetails od
         GROUP BY od.OrderId
         HAVING od.OrderId IN (SELECT
+            DISTINCT
             OrderId
         FROM
             inserted)) AS r1
