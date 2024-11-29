@@ -87,9 +87,29 @@ GO
 INSERT INTO OrderDetails
     (OrderId, ProductId, Quantity, UnitPrice)
 VALUES
-    (1, 1, 1, 1500.00),
-    (1, 3, 1, 20.00),
-    (2, 2, 1, 800.00);
+    (1, 1, 1, 10.00),
+    (1, 3, 1, NULL),
+    (2, 2, 1, 80.00);
+
+
+INSERT INTO OrderDetails
+    (OrderId, ProductId, Quantity)
+VALUES
+    (1, 2, 2)
+
+
+CREATE TRIGGER t1 ON OrderDetails
+INSTEAD OF INSERT
+AS INSERT INTO OrderDetails
+SELECT
+    i.OrderId ,
+    i.ProductId ,
+    i.Quantity ,
+    ISNULL(i.UnitPrice ,p.Price)
+FROM
+    Products AS p JOIN inserted AS i ON p.ProductId = i.ProductId
+
+
 
 -- DML
 
@@ -246,7 +266,18 @@ VALUES
 
 --14
 
-delete Orders
+DELETE Orders
 WHERE OrderId = 3
 
 --15
+
+TRUNCATE  TABLE Categories
+
+GO
+
+INSERT INTO Categories
+    (CategoryId, CategoryName)
+VALUES
+    (1, 'toys'),
+    (2, 'Books'),
+    (3, 'Clothing');
