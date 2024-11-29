@@ -44,8 +44,9 @@ CREATE TABLE OrderDetails
     PRIMARY KEY(OrderId, ProductId)
 )
 
+-- update total amount and unit price
 
-ALTER TRIGGER t1 ON OrderDetails
+CREATE TRIGGER t1 ON OrderDetails
 INSTEAD OF INSERT
 AS
 BEGIN
