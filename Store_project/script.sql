@@ -45,6 +45,34 @@ CREATE TABLE OrderDetails
 )
 
 
+ALTER TRIGGER t1 ON OrderDetails
+INSTEAD OF INSERT
+AS
+BEGIN
+    INSERT INTO OrderDetails
+    SELECT
+        i.OrderId ,
+        i.ProductId ,
+        i.Quantity ,
+        ISNULL(i.UnitPrice ,p.Price)
+    FROM
+        Products AS p JOIN inserted AS i ON p.ProductId = i.ProductId
+
+
+    UPDATE o
+    SET o.TotalAmount = r1.total
+    FROM
+        Orders AS o JOIN
+        (SELECT
+            o.OrderId ,
+            SUM(od.Quantity * od.UnitPrice) AS total
+        FROM
+            OrderDetails AS od JOIN Orders AS o ON od.OrderId = o.OrderId
+        GROUP BY o.OrderId) AS r1
+        ON o.OrderId = r1.OrderId
+
+END
+
 
 --DML
 
@@ -96,18 +124,6 @@ INSERT INTO OrderDetails
     (OrderId, ProductId, Quantity)
 VALUES
     (1, 2, 2)
-
-
-CREATE TRIGGER t1 ON OrderDetails
-INSTEAD OF INSERT
-AS INSERT INTO OrderDetails
-SELECT
-    i.OrderId ,
-    i.ProductId ,
-    i.Quantity ,
-    ISNULL(i.UnitPrice ,p.Price)
-FROM
-    Products AS p JOIN inserted AS i ON p.ProductId = i.ProductId
 
 
 
