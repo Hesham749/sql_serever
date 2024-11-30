@@ -379,3 +379,10 @@ FROM
     Products AS p LEFT JOIN Categories AS c ON p.CategoryId = c.CategoryId
 
 --23
+
+SELECT
+    *
+FROM
+    Customers AS c LEFT JOIN Orders AS o ON o.CustomerId = c.CustomerId
+
+
