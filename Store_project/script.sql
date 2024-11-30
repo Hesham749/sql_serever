@@ -386,3 +386,18 @@ FROM
     Customers AS c LEFT JOIN Orders AS o ON o.CustomerId = c.CustomerId
 
 
+--24
+
+
+SELECT
+    p.*
+FROM
+    Products AS p JOIN (SELECT
+        * ,
+        DENSE_RANK()OVER(ORDER BY p.Price DESC) AS dr
+    FROM
+        Products AS p) AS pr
+    ON p.ProductId = pr.ProductId
+WHERE pr.dr = 2
+
+
