@@ -479,4 +479,21 @@ EXEC sp_getProductsInRange 10,80
 
 --32
 
+CREATE FUNCTION GetOrderTotal(@id INT)
+RETURNS DEC(8,2)
+BEGIN
+    RETURN (SELECT
+        o.TotalAmount
+    FROM
+        Orders AS o
+    WHERE o.OrderId = @id
+        )
+END
+
+
+SELECT
+    dbo.GetOrderTotal(2)
+
+
+--33
 
