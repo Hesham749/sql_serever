@@ -442,12 +442,21 @@ FROM
 CREATE VIEW vOrdersProduct
 AS
     SELECT
-        o.* , p.*
+        o.* ,
+        p.*
     FROM
         Orders AS o JOIN OrderDetails AS od
         ON od.OrderId = o.OrderId JOIN Products AS p
         ON od.ProductId = p.ProductId
 
-SELECT * FROM vOrdersProduct
+SELECT
+    *
+FROM
+    vOrdersProduct
+
+
+--30
+
+CREATE NONCLUSTERED INDEX  i2 ON Customers(Email)
 
 
