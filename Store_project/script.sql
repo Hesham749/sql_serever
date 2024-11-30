@@ -137,8 +137,8 @@ GO
 INSERT INTO OrderDetails
     (OrderId, ProductId, Quantity, UnitPrice)
 VALUES
-    (1, 1, 1, 10.00),
-    (1, 3, 1, NULL),
+    (1, 1, 15, 10.00),
+    (1, 3, 10, NULL),
     (2, 2, 1, 80.00);
 
 
@@ -426,5 +426,15 @@ UPDATE p
 FROM
     Products AS p
 WHERE Stock >= 20
+
+
+--28
+
+SELECT
+    *,
+    CASE WHEN TotalAmount >= 1000 THEN 'High Value' WHEN TotalAmount BETWEEN 500 AND 999 THEN 'Medium Value' ELSE 'LowValue' END categorize
+FROM
+    Orders AS o
+
 
 
