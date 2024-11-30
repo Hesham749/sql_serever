@@ -409,3 +409,8 @@ FROM
     Orders AS o
 
 --26
+
+
+SELECT * FROM Products as p JOIN OrderDetails as od
+on od.ProductId = p.ProductId
+WHERE p.Stock < od.Quantity
