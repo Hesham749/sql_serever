@@ -497,3 +497,24 @@ SELECT
 
 --33
 
+
+DECLARE @Quantity INT =2 , @ProductId INT = 100
+BEGIN TRY
+BEGIN TRANSACTION
+
+UPDATE Products
+SET Stock -= @Quantity
+WHERE ProductId = @ProductId
+
+INSERT INTO OrderDetails
+    (OrderId , ProductId , Quantity )
+VALUES
+    (3, @ProductId , @Quantity)
+COMMIT
+end TRY
+BEGIN CATCH
+ ROLLBACK
+ SELECT
+    'Action terminated'
+end CATCH
+
