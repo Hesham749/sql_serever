@@ -371,3 +371,11 @@ FROM
     Orders AS o JOIN OrderDetails AS od ON od.OrderId = o.OrderId
     JOIN Products AS p ON od.ProductId = p.ProductId
 
+--22
+
+SELECT
+    *
+FROM
+    Products AS p LEFT JOIN Categories AS c ON p.CategoryId = c.CategoryId
+
+--23
