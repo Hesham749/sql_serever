@@ -437,4 +437,17 @@ FROM
     Orders AS o
 
 
+--29
+
+CREATE VIEW vOrdersProduct
+AS
+    SELECT
+        o.* , p.*
+    FROM
+        Orders AS o JOIN OrderDetails AS od
+        ON od.OrderId = o.OrderId JOIN Products AS p
+        ON od.ProductId = p.ProductId
+
+SELECT * FROM vOrdersProduct
+
 
