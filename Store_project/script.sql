@@ -401,3 +401,11 @@ FROM
 WHERE pr.dr = 2
 
 
+--25
+
+SELECT
+    SUM(TotalAmount) AS revenue
+FROM
+    Orders AS o
+
+--26
