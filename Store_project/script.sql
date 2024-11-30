@@ -460,3 +460,23 @@ FROM
 CREATE NONCLUSTERED INDEX  i2 ON Customers(Email)
 
 
+--31
+
+CREATE PROC sp_getProductsInRange
+    @start DEC(8,2) ,
+    @end DEC
+(8,2)
+AS
+SELECT
+    *
+FROM
+    Products AS p
+WHERE p.Price  BETWEEN @start AND @end
+
+
+EXEC sp_getProductsInRange 10,80
+
+
+--32
+
+
