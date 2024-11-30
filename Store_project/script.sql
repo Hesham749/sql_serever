@@ -330,18 +330,36 @@ ADD Bday DATE
 --17
 
 ALTER TABLE customers
-ADD Age as (DATEDIFF(YEAR,BDay,GETDATE()))
+ADD Age AS (DATEDIFF(YEAR,BDay,GETDATE()))
 
 
 --18
 
-SELECT * FROM Orders as o
+SELECT
+    *
+FROM
+    Orders AS o
 WHERE DATEDIFF(DAY, o.OrderDate,GETDATE()) <= 7
 
 
 --19
 
-SELECT top 1 * FROM Products as p
+SELECT
+    TOP 1
+    *
+FROM
+    Products AS p
 ORDER BY p.Price
 
 
+--18
+
+SELECT
+    c.Address,
+    COUNT(*) AS [number of customers]
+FROM
+    Customers AS c
+GROUP BY c.Address
+
+
+--19
