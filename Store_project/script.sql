@@ -411,6 +411,20 @@ FROM
 --26
 
 
-SELECT * FROM Products as p JOIN OrderDetails as od
-on od.ProductId = p.ProductId
+SELECT
+    *
+FROM
+    Products AS p JOIN OrderDetails AS od
+    ON od.ProductId = p.ProductId
 WHERE p.Stock < od.Quantity
+
+
+-- 27
+
+UPDATE p
+    SET p.Price -= p.Price * 0.10
+FROM
+    Products AS p
+WHERE Stock >= 20
+
+
