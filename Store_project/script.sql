@@ -335,9 +335,13 @@ ADD Age as (DATEDIFF(YEAR,BDay,GETDATE()))
 
 --18
 
-SELECT top 1 * FROM Products as p
-ORDER BY p.Price DESC
+SELECT * FROM Orders as o
+WHERE DATEDIFF(DAY, o.OrderDate,GETDATE()) <= 7
 
 
 --19
+
+SELECT top 1 * FROM Products as p
+ORDER BY p.Price
+
 
