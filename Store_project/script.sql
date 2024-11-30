@@ -319,3 +319,17 @@ VALUES
     (1, 'toys'),
     (2, 'Books'),
     (3, 'Clothing');
+
+
+--16
+
+ALTER TABLE Customers
+ADD Bday DATE
+
+
+--17
+
+ALTER TABLE customers
+ADD Age as (DATEDIFF(YEAR,BDay,GETDATE()))
+
+
