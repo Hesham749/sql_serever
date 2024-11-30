@@ -352,7 +352,7 @@ FROM
 ORDER BY p.Price
 
 
---18
+--20
 
 SELECT
     c.Address,
@@ -362,4 +362,12 @@ FROM
 GROUP BY c.Address
 
 
---19
+--21
+
+SELECT
+    o.* ,
+    p.ProductName
+FROM
+    Orders AS o JOIN OrderDetails AS od ON od.OrderId = o.OrderId
+    JOIN Products AS p ON od.ProductId = p.ProductId
+
