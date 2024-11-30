@@ -333,3 +333,11 @@ ALTER TABLE customers
 ADD Age as (DATEDIFF(YEAR,BDay,GETDATE()))
 
 
+--18
+
+SELECT top 1 * FROM Products as p
+ORDER BY p.Price DESC
+
+
+--19
+
