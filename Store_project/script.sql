@@ -548,7 +548,8 @@ UPDATE Products
 SET Stock -=3
 WHERE ProductId =2
 
-INSERT INTO OrderDetails(OrderId, ProductId,Quantity)
+INSERT INTO OrderDetails
+    (OrderId, ProductId,Quantity)
 VALUES
     (5, 2, 3)
 
@@ -558,4 +559,38 @@ BEGIN CATCH
 ROLLBACK
 end CATCH
 
+--36
 
+
+
+SELECT
+    p.ProductId,
+    p.Stock,
+    p.Price
+INTO auditLog
+
+FROM
+    Products AS p
+WHERE p.ProductId != p.ProductId
+
+
+ALTER TABLE auditLog
+ADD      modifier varchar(100) DEFAULT SYSTEM_USER
+    , ModifyDate DATETIME DEFAULT  GETDATE()
+
+
+
+CREATE TRIGGER t5 ON Products
+after UPDATE
+AS
+IF UPDATE(Stock) OR UPDATE(price)
+BEGIN
+    INSERT INTO auditLog
+        (ProductId ,Stock , price)
+    SELECT
+        i.ProductId ,
+        i.Stock ,
+        i.Price
+    FROM
+        inserted AS i
+END
