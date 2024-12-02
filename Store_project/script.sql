@@ -273,7 +273,7 @@ DEALLOCATE c1
 
 --13
 
-CREATE TRIGGER t1 ON OrderDetails after INSERT
+CREATE TRIGGER t2 ON OrderDetails after INSERT
 AS
 
     DECLARE @Quantity INT = (SELECT
@@ -474,7 +474,7 @@ FROM
 WHERE p.Price  BETWEEN @start AND @end
 
 
-EXEC sp_getProductsInRange 10,80
+EXEC sp_getInRange 10,80
 
 
 --32
@@ -519,3 +519,19 @@ BEGIN CATCH
 end CATCH
 
 --34
+USE Depi_project
+
+
+CREATE TRIGGER t3 ON OrderDetails
+after INSERT
+AS
+BEGIN
+    UPDATE p
+    SET p.Stock -= i.Quantity
+    FROM
+        inserted AS i JOIN Products AS p
+        ON i.ProductId = p.ProductId
+END
+
+
+--35
