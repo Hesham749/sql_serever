@@ -535,3 +535,27 @@ END
 
 
 --35
+
+BEGIN TRY
+BEGIN TRANSACTION
+INSERT INTO Orders
+    (OrderId ,CustomerId , OrderDate)
+VALUES
+    (4, 1, GETDATE())
+
+
+UPDATE Products
+SET Stock -=3
+WHERE ProductId =2
+
+INSERT INTO OrderDetails(OrderId, ProductId,Quantity)
+VALUES
+    (5, 2, 3)
+
+COMMIT
+END TRY
+BEGIN CATCH
+ROLLBACK
+end CATCH
+
+
